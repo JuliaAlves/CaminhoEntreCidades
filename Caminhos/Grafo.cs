@@ -69,11 +69,20 @@ namespace Caminhos
             }
         }
 
+        internal void Inserir(string cid1, string cid2, int dist, int velo)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Matriz das ligações
         /// </summary>
         LigacaoCidades[,] matriz;
+        private List<string> cidades;
 
-
+        public Grafo(List<string> cidades)
+        {
+            this.cidades = cidades;
+        }
     }
 }
