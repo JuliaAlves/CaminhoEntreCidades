@@ -14,7 +14,7 @@ namespace Caminhos
         /// <summary>
         /// Estrutura para uma ligação entre cidades
         /// </summary>
-        public class LigacaoCidades
+        public class LigacaoCidades : IComparable<LigacaoCidades>
         {
             int distancia;
             int velocidadeMedia;
@@ -50,13 +50,30 @@ namespace Caminhos
             /// <summary>
             /// Construtor
             /// </summary>
-            /// <param name="dist"></param>
-            /// <param name="vel"></param>
+            /// <param name="dist">Distância</param>
+            /// <param name="vel">Velocidade</param>
             public LigacaoCidades(int dist, int vel)
             {
                 Distancia = dist;
                 VelocidadeMedia = vel;
             }
+
+            /// <summary>
+            /// Compara uma ligação a outra
+            /// </summary>
+            /// <param name="ligacao">Outra ligação</param>
+            /// <returns>menor que 0 se for menor, 0 se for igual e maior que 0 se for maior</returns>
+            public int CompareTo(LigacaoCidades ligacao)
+            {
+                return Distancia / VelocidadeMedia - ligacao.Distancia / ligacao.VelocidadeMedia;
+            }
         }
+
+        /// <summary>
+        /// Matriz das ligações
+        /// </summary>
+        LigacaoCidades[,] matriz;
+
+
     }
 }
