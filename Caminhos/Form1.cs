@@ -14,11 +14,19 @@ namespace Caminhos
     public partial class Form1 : Form
     {
         Grafo distancias;
+        Dictionary<string, PointF> coordenadas;
+
+        /// <summary>
+        /// Construtor
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Lê o grafo do arquivo
+        /// </summary>
         private void LerArquivo()
         {
             StreamReader arq = new StreamReader("caminhos.txt");
@@ -50,6 +58,55 @@ namespace Caminhos
             }
 
             arq.Close();
+
+            arq = new StreamReader("coordenadas.txt");
+
+            arq.Close();
+        }
+
+        /// <summary>
+        /// Carregamento do form
+        /// </summary>
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            LerArquivo();
+        }
+
+        /// <summary>
+        /// Desenho do canvas
+        /// </summary>
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            using (Graphics g = e.Graphics)
+            {
+                RectangleF bounds = g.ClipBounds;
+                foreach (KeyValuePair<string, PointF> kvp in coordenadas)
+                {
+                    float ax = kvp.Value.X * bounds.Width,
+                        ay = kvp.Value.Y * bounds.Height; 
+                    g.FillEllipse(
+                        new SolidBrush(Color.Black), 
+                        ax, 
+                        ay, 
+                        8, 8
+                    );
+
+                    foreach (string cidade in distancias.Saidas(kvp.Key))
+                    {
+                        float bx = coordenadas[cidade].X * bounds.Width,
+                                by = coordenadas[cidade].Y * bounds.Height;
+
+                        Pen pen;
+                        if (distancias.VelocidadeMedia(kvp.Key, cidade) <= 200)
+                            pen = new Pen(Color.Orange);
+                        else
+                            pen = new Pen(Color.Purple);
+                        g.DrawLine(pen, ax, ay, bx, by);
+
+                        pen.Dispose();
+                    }
+                }
+            }
         }
     }
 }

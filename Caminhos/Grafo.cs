@@ -14,7 +14,7 @@ namespace Caminhos
         /// <summary>
         /// Estrutura para uma ligação entre cidades
         /// </summary>
-        public class LigacaoCidades : IComparable<LigacaoCidades>
+        class LigacaoCidades : IComparable<LigacaoCidades>
         {
             int distancia;
             int velocidadeMedia;
@@ -69,20 +69,97 @@ namespace Caminhos
             }
         }
 
-        internal void Inserir(string cid1, string cid2, int dist, int velo)
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// Matriz das ligações
         /// </summary>
         LigacaoCidades[,] matriz;
         private List<string> cidades;
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
+        /// <param name="cidades">Lista de cidades</param>
         public Grafo(List<string> cidades)
         {
             this.cidades = cidades;
+            matriz = new LigacaoCidades[cidades.Count, cidades.Count];
+        }
+
+        /// <summary>
+        /// Insere uma ligação
+        /// </summary>
+        /// <param name="cid1">Cidade de onde se sai</param>
+        /// <param name="cid2">Cidade para onde se vai</param>
+        /// <param name="dist">Distância</param>
+        /// <param name="velo">Velocidade média</param>
+        public void Inserir(string cid1, string cid2, int dist, int velo)
+        {
+            int i1 = cidades.IndexOf(cid1);
+            int i2 = cidades.IndexOf(cid2);
+
+            if (i1 < 0 || i2 < 0 || i1 == i2)
+                throw new Exception("Operação inválida");
+
+            matriz[i1, i2] = new LigacaoCidades(dist, velo);
+        }
+
+        /// <summary>
+        /// Obtém uma ligação entre duas cidades
+        /// </summary>
+        /// <param name="cid1">Cidade de origem</param>
+        /// <param name="cid2">Destino</param>
+        /// <returns>Um objeto LigacaoCidades para a ligação ou null caso ela não exista</returns>
+        private LigacaoCidades Ligacao(string cid1, string cid2)
+        {
+            int i1 = cidades.IndexOf(cid1);
+            int i2 = cidades.IndexOf(cid2);
+
+            if (i1 < 0 || i2 < 0 || i1 == i2)
+                throw new Exception("Operação inválida");
+
+            return matriz[i1, i2];
+        }
+
+        /// <summary>
+        /// Obtém a distância entre duas cidades
+        /// </summary>
+        /// <param name="cid1">Cidade de origem</param>
+        /// <param name="cid2">Destino</param>
+        /// <returns>A distância entre as cidades ou -1 caso elas não tenham ligação</returns>
+        public int Distancia(string cid1, string cid2)
+        {
+            return Ligacao(cid1, cid2)?.Distancia ?? -1;
+        }
+
+        /// <summary>
+        /// Obtém a velocidade média do percurso entre duas cidades
+        /// </summary>
+        /// <param name="cid1">Cidade de origem</param>
+        /// <param name="cid2">Destino</param>
+        /// <returns>A velocidade média no percurso entre as cidades ou -1 
+        /// caso elas não tenham ligação</returns>
+        public int VelocidadeMedia(string cid1, string cid2)
+        {
+            return Ligacao(cid1, cid2)?.VelocidadeMedia ?? -1;
+        }
+        
+        /// <summary>
+        /// Obtém a lista de cidades para as quais uma outra cidade tem caminhos de saída
+        /// </summary>
+        /// <param name="cidade">Cidade de origem</param>
+        /// <returns>Uma lista com o nome das cidades conectadas</returns>
+        public List<string> Saidas(string cidade)
+        {
+            int i = cidades.IndexOf(cidade);
+            if (i < 0)
+                throw new Exception("Operação inválida");
+
+            List<string> r = new List<string>();
+            for (int j = 0; j < cidades.Count; j++)
+                if (matriz[i, j] != null)
+                    r.Add(cidades[j]);
+
+            return r;
         }
     }
 }
