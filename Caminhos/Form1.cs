@@ -16,6 +16,7 @@ namespace Caminhos
     {
         Grafo grafo;
         Dictionary<string, PointF> coordenadas;
+        string[][] caminhos;
 
         /// <summary>
         /// Construtor
@@ -88,13 +89,17 @@ namespace Caminhos
         /// </summary>
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
+            if (lsbCaminhos.SelectedItem == null)
+                return;
+
             Graphics g = e.Graphics;
             RectangleF bounds = g.ClipBounds;
 
             string anterior = null;
             float ax = 0, ay = 0, bx, by;
 
-            foreach (string atual in lsbCaminhos.Items)
+            string[] caminho = ((string)lsbCaminhos.SelectedItem).Split(',');
+            foreach (string atual in caminho)
             {
                 bx = coordenadas[atual].X * bounds.Width;
                 by = coordenadas[atual].Y * bounds.Height;
@@ -120,10 +125,8 @@ namespace Caminhos
         }
 
         /// <summary>
-        /// 
+        /// Clique no botão procurar
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnProcurar_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtOrigem.Text))
@@ -142,15 +145,18 @@ namespace Caminhos
 
             try
             {
-                List<string> caminho = grafo.ProcurarCaminho(txtOrigem.Text, txtDestino.Text);
+                caminhos = grafo.ProcurarCaminhos(txtOrigem.Text, txtDestino.Text).OrderBy((string[] caminho) =>
+                {
+                    return grafo.Peso(caminho);
+                }).ToArray();
 
-                if (caminho == null)
+                if (caminhos == null)
                     MessageBox.Show("Não existe caminho entre essas cidades, desculpe.", "Ooops", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 else
                 {
                     lsbCaminhos.Items.Clear();
-                    foreach (string cidade in caminho)
-                        lsbCaminhos.Items.Add(cidade);
+                    foreach (string[] caminho in caminhos)
+                        lsbCaminhos.Items.Add(string.Join(",", caminho));
                 }
             }
             catch (Exception)
@@ -158,6 +164,15 @@ namespace Caminhos
                 MessageBox.Show("A cidade especificada não existe", "Ooops", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
+            pictureBox1.Invalidate();
+        }
+
+        /// <summary>
+        /// Evento de seleção de item na listBox
+        /// Redesenha a pictureBox para mostrar o caminho no mapa
+        /// </summary>
+        private void lsbCaminhos_SelectedIndexChanged(object sender, EventArgs e)
+        {
             pictureBox1.Invalidate();
         }
     }
