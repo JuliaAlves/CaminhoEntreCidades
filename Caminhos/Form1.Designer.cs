@@ -37,6 +37,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.btnProcurar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -89,7 +90,7 @@
             // lsbCaminhos
             // 
             this.lsbCaminhos.FormattingEnabled = true;
-            this.lsbCaminhos.Location = new System.Drawing.Point(23, 114);
+            this.lsbCaminhos.Location = new System.Drawing.Point(23, 129);
             this.lsbCaminhos.Name = "lsbCaminhos";
             this.lsbCaminhos.Size = new System.Drawing.Size(146, 212);
             this.lsbCaminhos.TabIndex = 5;
@@ -97,7 +98,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 98);
+            this.label3.Location = new System.Drawing.Point(20, 113);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 13);
             this.label3.TabIndex = 6;
@@ -121,11 +122,22 @@
             this.label5.TabIndex = 8;
             this.label5.Text = "Tempo:";
             // 
+            // btnProcurar
+            // 
+            this.btnProcurar.Location = new System.Drawing.Point(94, 85);
+            this.btnProcurar.Name = "btnProcurar";
+            this.btnProcurar.Size = new System.Drawing.Size(75, 23);
+            this.btnProcurar.TabIndex = 9;
+            this.btnProcurar.Text = "Procurar";
+            this.btnProcurar.UseVisualStyleBackColor = true;
+            this.btnProcurar.Click += new System.EventHandler(this.btnProcurar_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(703, 445);
+            this.Controls.Add(this.btnProcurar);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -155,6 +167,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnProcurar;
     }
 }
 

@@ -38,5 +38,3 @@ Valladolid     Santander       244   66
 Valladolid     Leon            137   95
 Leon           Oviedo          125   83
 Leon           Ponferrada      113   75
-
-

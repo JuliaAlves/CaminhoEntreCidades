@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Caminhos
 {
@@ -86,13 +87,33 @@ namespace Caminhos
         }
 
         /// <summary>
-        /// Insere uma ligação
+        /// Insere uma cidade no grafo
+        /// </summary>
+        /// <param name="cid">Cidade a ser inserida</param>
+        public void InserirCidade(string cid)
+        {
+            cidades.Add(cid);
+
+            // Cria uma matriz com tamanho suficiente para incluir a nova cidade
+            LigacaoCidades[,] novaMatriz = new LigacaoCidades[cidades.Count, cidades.Count];
+
+            // Copia a matriz antiga para a nova, redimensionada
+            for (int x = 0; x < cidades.Count - 1; x++)
+                for (int y = 0; y < cidades.Count - 1; y++)
+                    novaMatriz[x, y] = matriz[x, y];
+
+            // Substitui a matriz antiga pela nova
+            matriz = novaMatriz;
+        }
+
+        /// <summary>
+        /// Insere uma ligação no grafo
         /// </summary>
         /// <param name="cid1">Cidade de onde se sai</param>
         /// <param name="cid2">Cidade para onde se vai</param>
         /// <param name="dist">Distância</param>
         /// <param name="velo">Velocidade média</param>
-        public void Inserir(string cid1, string cid2, int dist, int velo)
+        public void InserirLigacao(string cid1, string cid2, int dist, int velo)
         {
             int i1 = cidades.IndexOf(cid1);
             int i2 = cidades.IndexOf(cid2);
@@ -109,7 +130,7 @@ namespace Caminhos
         /// <param name="cid1">Cidade de origem</param>
         /// <param name="cid2">Destino</param>
         /// <returns>Um objeto LigacaoCidades para a ligação ou null caso ela não exista</returns>
-        private LigacaoCidades Ligacao(string cid1, string cid2)
+        private LigacaoCidades GetLigacao(string cid1, string cid2)
         {
             int i1 = cidades.IndexOf(cid1);
             int i2 = cidades.IndexOf(cid2);
@@ -126,9 +147,9 @@ namespace Caminhos
         /// <param name="cid1">Cidade de origem</param>
         /// <param name="cid2">Destino</param>
         /// <returns>A distância entre as cidades ou -1 caso elas não tenham ligação</returns>
-        public int Distancia(string cid1, string cid2)
+        public int GetDistancia(string cid1, string cid2)
         {
-            return Ligacao(cid1, cid2)?.Distancia ?? -1;
+            return GetLigacao(cid1, cid2)?.Distancia ?? -1;
         }
 
         /// <summary>
@@ -138,9 +159,9 @@ namespace Caminhos
         /// <param name="cid2">Destino</param>
         /// <returns>A velocidade média no percurso entre as cidades ou -1 
         /// caso elas não tenham ligação</returns>
-        public int VelocidadeMedia(string cid1, string cid2)
+        public int GetVelocidadeMedia(string cid1, string cid2)
         {
-            return Ligacao(cid1, cid2)?.VelocidadeMedia ?? -1;
+            return GetLigacao(cid1, cid2)?.VelocidadeMedia ?? -1;
         }
         
         /// <summary>
@@ -148,7 +169,7 @@ namespace Caminhos
         /// </summary>
         /// <param name="cidade">Cidade de origem</param>
         /// <returns>Uma lista com o nome das cidades conectadas</returns>
-        public List<string> Saidas(string cidade)
+        public List<string> GetSaidas(string cidade)
         {
             int i = cidades.IndexOf(cidade);
             if (i < 0)
@@ -160,6 +181,56 @@ namespace Caminhos
                     r.Add(cidades[j]);
 
             return r;
+        }
+
+        /// <summary>
+        /// Procura um caminho entre as cidades 1 e 2
+        /// </summary>
+        /// <param name="cid1">Cidade de origem</param>
+        /// <param name="cid2">Cidade de destino</param>
+        /// <param name="percorrido">Lista de cidades percorridas</param>
+        /// <returns>Uma lista com o nome das cidades percorridas para se ir de cid1
+        /// a cid2 ou null caso não haja caminho entre as duas cidades</returns>
+        private List<string> ProcurarCaminho(string cid1, string cid2, List<string> percorrido)
+        {
+            List<string> caminho = null;
+
+            List<string>.Enumerator e = GetSaidas(cid1).GetEnumerator();
+
+            while (caminho == null && e.MoveNext())
+            {
+                if (e.Current == cid2)
+                {
+                    caminho = new List<string>();
+                    caminho.Add(cid1);
+                    caminho.Add(cid2);
+                }
+                else if (!percorrido.Contains(e.Current))
+                {
+                    percorrido.Add(cid1);
+                    List<string> proximo = ProcurarCaminho(e.Current, cid2, percorrido);
+                    if (proximo != null)
+                    {
+                        caminho = new List<string>();
+                        caminho.Add(cid1);
+                        caminho.AddRange(proximo);
+                    }
+                }
+            }
+
+            return caminho;
+        }
+
+        /// <summary>
+        /// Procura um caminho entre as cidades 1 e 2
+        /// </summary>
+        /// <param name="cid1">Cidade de origem</param>
+        /// <param name="cid2">Cidade de destino</param>
+        /// <returns>Uma lista com o nome das cidades percorridas para se ir de cid1
+        /// a cid2 ou null caso não haja caminho entre as duas cidades</returns>
+        public List<string> ProcurarCaminho(string cid1, string cid2)
+        {
+            return ProcurarCaminho(cid1, cid2, new List<string>());
         }
     }
 }
