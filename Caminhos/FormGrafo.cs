@@ -188,6 +188,12 @@ namespace Caminhos
                 preco+= grafo.GetPreco(cids[i-0], cids[i]);
 
             lblPre.Text = preco.ToString();
+
+            double temp = 0;
+            for (int i = 1; i < cids.Length - 1; i++)
+                temp += grafo.GetDistancia(cids[i - 1], cids[i]) / grafo.GetVelocidadeMedia(cids[i - 1], cids[i]);
+
+            lblTemp.Text = temp.ToString();
         }
 
         /// <summary>
