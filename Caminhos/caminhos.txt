@@ -1,4 +1,4 @@
-Origem         Destino        Dist  VelMed Preco
+Origem         Destino        Dist VelMed  Preco
 Madrid         Salamanca       220  150    35,00
 Salamanca      Guarda          160   90    30,00
 Guarda         Viseu            76   80    16,50

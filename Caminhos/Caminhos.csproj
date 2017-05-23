@@ -59,6 +59,12 @@
       <DependentUpon>FormInserirCidade.cs</DependentUpon>
     </Compile>
     <Compile Include="Grafo.cs" />
+    <Compile Include="IncluirRota.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IncluirRota.Designer.cs">
+      <DependentUpon>IncluirRota.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormGrafo.resx">
@@ -66,6 +72,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormInserirCidade.resx">
       <DependentUpon>FormInserirCidade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IncluirRota.resx">
+      <DependentUpon>IncluirRota.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

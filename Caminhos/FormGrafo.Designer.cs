@@ -37,7 +37,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnProcurar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnRota = new System.Windows.Forms.Button();
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblPre = new System.Windows.Forms.Label();
+            this.lblTemp = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -99,7 +104,7 @@
             this.lsbCaminhos.FormattingEnabled = true;
             this.lsbCaminhos.Location = new System.Drawing.Point(11, 120);
             this.lsbCaminhos.Name = "lsbCaminhos";
-            this.lsbCaminhos.Size = new System.Drawing.Size(146, 316);
+            this.lsbCaminhos.Size = new System.Drawing.Size(146, 186);
             this.lsbCaminhos.TabIndex = 5;
             this.lsbCaminhos.SelectedIndexChanged += new System.EventHandler(this.lsbCaminhos_SelectedIndexChanged);
             // 
@@ -125,6 +130,11 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblTemp);
+            this.panel1.Controls.Add(this.label7);
+            this.panel1.Controls.Add(this.lblPre);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.btnRota);
             this.panel1.Controls.Add(this.lsbCaminhos);
             this.panel1.Controls.Add(this.btnProcurar);
             this.panel1.Controls.Add(this.label1);
@@ -138,6 +148,16 @@
             this.panel1.Size = new System.Drawing.Size(168, 445);
             this.panel1.TabIndex = 10;
             // 
+            // btnRota
+            // 
+            this.btnRota.Location = new System.Drawing.Point(82, 410);
+            this.btnRota.Name = "btnRota";
+            this.btnRota.Size = new System.Drawing.Size(75, 23);
+            this.btnRota.TabIndex = 10;
+            this.btnRota.Text = "Incluir Rota";
+            this.btnRota.UseVisualStyleBackColor = true;
+            this.btnRota.Click += new System.EventHandler(this.btnRota_Click);
+            // 
             // splitter1
             // 
             this.splitter1.Location = new System.Drawing.Point(168, 0);
@@ -145,6 +165,40 @@
             this.splitter1.Size = new System.Drawing.Size(3, 445);
             this.splitter1.TabIndex = 11;
             this.splitter1.TabStop = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(16, 328);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(41, 13);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Preço: ";
+            // 
+            // lblPre
+            // 
+            this.lblPre.AutoSize = true;
+            this.lblPre.Location = new System.Drawing.Point(67, 328);
+            this.lblPre.Name = "lblPre";
+            this.lblPre.Size = new System.Drawing.Size(0, 13);
+            this.lblPre.TabIndex = 12;
+            // 
+            // lblTemp
+            // 
+            this.lblTemp.AutoSize = true;
+            this.lblTemp.Location = new System.Drawing.Point(70, 351);
+            this.lblTemp.Name = "lblTemp";
+            this.lblTemp.Size = new System.Drawing.Size(0, 13);
+            this.lblTemp.TabIndex = 14;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(16, 351);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(54, 13);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "Duração: ";
             // 
             // FormGrafo
             // 
@@ -176,6 +230,11 @@
         private System.Windows.Forms.Button btnProcurar;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Splitter splitter1;
+        private System.Windows.Forms.Button btnRota;
+        private System.Windows.Forms.Label lblTemp;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblPre;
+        private System.Windows.Forms.Label label4;
     }
 }
 

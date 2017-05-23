@@ -56,9 +56,10 @@ namespace Caminhos
                 string cid1 = linha.Substring(0, 15).Trim();
                 string cid2 = linha.Substring(15, 15).Trim();
                 int dist = Convert.ToInt32(linha.Substring(31, 4));
-                int velo = Convert.ToInt32(linha.Substring(36, 4));
+
+                int velo = Convert.ToInt32(linha.Substring(36,4));
                 double pre = Convert.ToDouble(linha.Substring(44));
-                grafo.InserirLigacao(cid1, cid2, dist, velo, pre);
+                grafo.InserirLigacao(cid1,cid2,dist, velo, pre);
             }
 
             arq.Close();
@@ -211,6 +212,11 @@ namespace Caminhos
                     grafo.InserirCidade(frmInserir.Nome);
                 }
             }
+        }
+
+        private void btnRota_Click(object sender, EventArgs e)
+        {
+            new IncluirRota(coordenadas).Show();
         }
     }
 }
