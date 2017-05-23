@@ -19,6 +19,7 @@ namespace Caminhos
         {
             int distancia;
             int velocidadeMedia;
+            double preco;
 
             /// <summary>
             /// Distância entre as duas cidades
@@ -49,14 +50,32 @@ namespace Caminhos
             }
 
             /// <summary>
+            /// Preço da viagem 
+            /// </summary>
+            public double Preco
+            {
+                get { return preco; }
+
+                set
+                {
+                    if (value < 0)
+                        throw new Exception("Preço inválido");
+
+                    preco = value;
+                }
+            }
+
+            /// <summary>
             /// Construtor
             /// </summary>
             /// <param name="dist">Distância</param>
             /// <param name="vel">Velocidade</param>
-            public LigacaoCidades(int dist, int vel)
+            /// <param name="pre">Preço</param>
+            public LigacaoCidades(int dist, int vel, double pre)
             {
                 Distancia = dist;
                 VelocidadeMedia = vel;
+                Preco = pre;
             }
 
             /// <summary>
@@ -113,7 +132,7 @@ namespace Caminhos
         /// <param name="cid2">Cidade para onde se vai</param>
         /// <param name="dist">Distância</param>
         /// <param name="velo">Velocidade média</param>
-        public void InserirLigacao(string cid1, string cid2, int dist, int velo)
+        public void InserirLigacao(string cid1, string cid2, int dist, int velo, double preco)
         {
             int i1 = cidades.IndexOf(cid1);
             int i2 = cidades.IndexOf(cid2);
@@ -121,7 +140,7 @@ namespace Caminhos
             if (i1 < 0 || i2 < 0 || i1 == i2)
                 throw new Exception("Operação inválida");
 
-            matriz[i1, i2] = new LigacaoCidades(dist, velo);
+            matriz[i1, i2] = new LigacaoCidades(dist, velo, preco);
         }
 
         /// <summary>
@@ -149,7 +168,8 @@ namespace Caminhos
         /// <returns>A distância entre as cidades ou -1 caso elas não tenham ligação</returns>
         public int GetDistancia(string cid1, string cid2)
         {
-            return GetLigacao(cid1, cid2)?.Distancia ?? -1;
+            LigacaoCidades lig = GetLigacao(cid1, cid2);
+            return lig != null ? lig.Distancia : -1;
         }
 
         /// <summary>
@@ -161,7 +181,21 @@ namespace Caminhos
         /// caso elas não tenham ligação</returns>
         public int GetVelocidadeMedia(string cid1, string cid2)
         {
-            return GetLigacao(cid1, cid2)?.VelocidadeMedia ?? -1;
+            LigacaoCidades lig = GetLigacao(cid1, cid2);
+            return lig != null ? lig.VelocidadeMedia : -1;
+        }
+
+        /// <summary>
+        /// Obtém o preço do percurso entre duas cidades
+        /// </summary>
+        /// <param name="cid1">Cidade de origem</param>
+        /// <param name="cid2">Destino</param>
+        /// <returns>O preço do percurso entre as cidades ou -1 
+        /// caso elas não tenham ligação</returns>
+        public double GetPreco(string cid1, string cid2)
+        {
+            LigacaoCidades lig = GetLigacao(cid1, cid2);
+            return lig != null ? lig.Preco : -1;
         }
         
         /// <summary>

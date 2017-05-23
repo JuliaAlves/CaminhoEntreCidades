@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace Caminhos
 {
-    public partial class Form1 : Form
+    public partial class FormGrafo : Form
     {
         Grafo grafo;
         Dictionary<string, PointF> coordenadas;
@@ -21,7 +21,7 @@ namespace Caminhos
         /// <summary>
         /// Construtor
         /// </summary>
-        public Form1()
+        public FormGrafo()
         {
             InitializeComponent();
         }
@@ -56,9 +56,9 @@ namespace Caminhos
                 string cid1 = linha.Substring(0, 15).Trim();
                 string cid2 = linha.Substring(15, 15).Trim();
                 int dist = Convert.ToInt32(linha.Substring(31, 4));
-                int velo = Convert.ToInt32(linha.Substring(36,4));
+                int velo = Convert.ToInt32(linha.Substring(36, 4));
                 double pre = Convert.ToDouble(linha.Substring(44));
-                grafo.InserirLigacao(cid1,cid2,dist, velo, pre);
+                grafo.InserirLigacao(cid1, cid2, dist, velo, pre);
             }
 
             arq.Close();
@@ -146,18 +146,25 @@ namespace Caminhos
 
             try
             {
-                caminhos = grafo.ProcurarCaminhos(txtOrigem.Text, txtDestino.Text).OrderBy((string[] caminho) =>
-                {
-                    return grafo.Peso(caminho);
-                }).ToArray();
+                caminhos = grafo.ProcurarCaminhos(txtOrigem.Text, txtDestino.Text);
 
                 if (caminhos == null)
                     MessageBox.Show("Não existe caminho entre essas cidades, desculpe.", "Ooops", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 else
                 {
+                    caminhos = new List<string[]>(caminhos).OrderBy((string[] caminho) =>
+                    {
+                        return grafo.Peso(caminho);
+                    }).ToArray();
+
                     lsbCaminhos.Items.Clear();
                     foreach (string[] caminho in caminhos)
+                    {
                         lsbCaminhos.Items.Add(string.Join(",", caminho));
+
+                        if (lsbCaminhos.Items.Count == 4)
+                            break;
+                    }
                 }
             }
             catch (Exception)
@@ -175,6 +182,27 @@ namespace Caminhos
         private void lsbCaminhos_SelectedIndexChanged(object sender, EventArgs e)
         {
             pictureBox1.Invalidate();
+            string[] cids = ((string)lsbCaminhos.SelectedItem).Split(',');
+            double preco=0;
+            for (int i = 1; i < cids.Length - 1; i++)
+                preco+= grafo.GetPreco(cids[i-0], cids[i]);
+
+            lblPre.Text = preco.ToString();
+        }
+
+        /// <summary>
+        /// Evento de clique do mouse 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void btnRota_Click(object sender, EventArgs e)
+        {
+            new IncluirRota(coordenadas).Show();
         }
     }
 }

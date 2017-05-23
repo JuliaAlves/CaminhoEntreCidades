@@ -1,40 +1,40 @@
-Origem         Destino        Dist  VelMed
-Madrid         Salamanca       220  150
-Salamanca      Guarda          160   90
-Guarda         Viseu            76   80
-Madrid         Zaragoza        314  300
-Madrid         Albacete        257  280
-Madrid         Toledo           72  205
-Madrid         Valladolid      189  140
-Toledo         Cordoba         344  210
-Cordoba        Sevilha         140  220
-Sevilha        Huelva           94  201
-Sevilha        Cadiz           121   80
-Sevilha        Caceres         267  120
-Caceres        Toledo          260  110
-Caceres        Castelo Branco  141   90
-Castelo Branco Coimbra         137  150
-Zaragoza       Lleida          150  210
-Lleida         Tarragona       100  205
-Tarragona      Barcelona        99  208
-Tarragona      Valencia        258  250
-Valencia       Albacete        188  270
-Albacete       Murcia          144  230
-Murcia         Cartagena        50  201
-Valencia       Alicante        179  105
-Alicante       Murcia           82   80
-Murcia         Lorca            70   60
-Zaragoza       Valencia        308   93
-Zaragoza       Pau             235   60
-Pau            Toulouse        195   90
-Toulouse       Montpellier     246   76
-Zaragoza       Logrono         170  100
-Logrono        San Sebastian   167   75
-Logrono        Bilbao          136   77
-Logrono        Burgos          104   50
-Bilbao         Burgos          158   70
-Burgos         Valladolid      136   50
-Valladolid     Santander       244   66
-Valladolid     Leon            137   95
-Leon           Oviedo          125   83
-Leon           Ponferrada      113   75
+Origem         Destino        Dist VelMed  Preco
+Madrid         Salamanca       220  150    35,00
+Salamanca      Guarda          160   90    30,00
+Guarda         Viseu            76   80    16,50
+Madrid         Zaragoza        314  300    45,00
+Madrid         Albacete        257  280    42,50
+Madrid         Toledo           72  205    16,00
+Madrid         Valladolid      189  140    31,50
+Toledo         Cordoba         344  210    46,00
+Cordoba        Sevilha         140  220    38,00
+Sevilha        Huelva           94  201    30,00
+Sevilha        Cadiz           121   80    27,00
+Sevilha        Caceres         267  120    35,00
+Caceres        Toledo          260  110    34,50
+Caceres        Castelo Branco  141   90    28,00
+Castelo Branco Coimbra         137  150    27,50
+Zaragoza       Lleida          150  210    28,50
+Lleida         Tarragona       100  205    25,00
+Tarragona      Barcelona        99  208    24,00
+Tarragona      Valencia        258  250    33,00
+Valencia       Albacete        188  270    30,20
+Albacete       Murcia          144  230    28,20
+Murcia         Cartagena        50  201    15,00
+Valencia       Alicante        179  105    29,00
+Alicante       Murcia           82   80    17,50
+Murcia         Lorca            70   60    16,20
+Zaragoza       Valencia        308   93    40,00
+Zaragoza       Pau             235   60    33,00
+Pau            Toulouse        195   90    25,00
+Toulouse       Montpellier     246   76    35,00
+Zaragoza       Logrono         170  100    24,00
+Logrono        San Sebastian   167   75    24,50
+Logrono        Bilbao          136   77    22,50
+Logrono        Burgos          104   50    20,00
+Bilbao         Burgos          158   70    25,50
+Burgos         Valladolid      136   50    24,00
+Valladolid     Santander       244   66    32,50
+Valladolid     Leon            137   95    25,00
+Leon           Oviedo          125   83    22,20
+Leon           Ponferrada      113   75    21,00
