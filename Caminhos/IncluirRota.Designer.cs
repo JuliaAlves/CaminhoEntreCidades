@@ -1,6 +1,6 @@
 ﻿namespace Caminhos
 {
-    partial class IncluirRota
+    partial class FormIncluirRota
     {
         /// <summary>
         /// Required designer variable.
@@ -35,7 +35,7 @@
             this.txtVel = new System.Windows.Forms.TextBox();
             this.txtDist = new System.Windows.Forms.TextBox();
             this.cmbOrigem = new System.Windows.Forms.ComboBox();
-            this.cmbDestinho = new System.Windows.Forms.ComboBox();
+            this.cmbDestino = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtPre = new System.Windows.Forms.TextBox();
             this.btnIncluir = new System.Windows.Forms.Button();
@@ -81,14 +81,14 @@
             // 
             this.txtVel.Location = new System.Drawing.Point(76, 119);
             this.txtVel.Name = "txtVel";
-            this.txtVel.Size = new System.Drawing.Size(100, 20);
+            this.txtVel.Size = new System.Drawing.Size(129, 20);
             this.txtVel.TabIndex = 5;
             // 
             // txtDist
             // 
             this.txtDist.Location = new System.Drawing.Point(76, 86);
             this.txtDist.Name = "txtDist";
-            this.txtDist.Size = new System.Drawing.Size(100, 20);
+            this.txtDist.Size = new System.Drawing.Size(129, 20);
             this.txtDist.TabIndex = 4;
             // 
             // cmbOrigem
@@ -98,18 +98,18 @@
             this.cmbOrigem.FormattingEnabled = true;
             this.cmbOrigem.Location = new System.Drawing.Point(76, 21);
             this.cmbOrigem.Name = "cmbOrigem";
-            this.cmbOrigem.Size = new System.Drawing.Size(100, 21);
+            this.cmbOrigem.Size = new System.Drawing.Size(129, 21);
             this.cmbOrigem.TabIndex = 8;
             // 
-            // cmbDestinho
+            // cmbDestino
             // 
-            this.cmbDestinho.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.cmbDestinho.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbDestinho.FormattingEnabled = true;
-            this.cmbDestinho.Location = new System.Drawing.Point(76, 54);
-            this.cmbDestinho.Name = "cmbDestinho";
-            this.cmbDestinho.Size = new System.Drawing.Size(100, 21);
-            this.cmbDestinho.TabIndex = 9;
+            this.cmbDestino.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cmbDestino.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbDestino.FormattingEnabled = true;
+            this.cmbDestino.Location = new System.Drawing.Point(76, 54);
+            this.cmbDestino.Name = "cmbDestino";
+            this.cmbDestino.Size = new System.Drawing.Size(129, 21);
+            this.cmbDestino.TabIndex = 9;
             // 
             // label5
             // 
@@ -124,12 +124,12 @@
             // 
             this.txtPre.Location = new System.Drawing.Point(76, 148);
             this.txtPre.Name = "txtPre";
-            this.txtPre.Size = new System.Drawing.Size(100, 20);
+            this.txtPre.Size = new System.Drawing.Size(129, 20);
             this.txtPre.TabIndex = 10;
             // 
             // btnIncluir
             // 
-            this.btnIncluir.Location = new System.Drawing.Point(101, 175);
+            this.btnIncluir.Location = new System.Drawing.Point(130, 175);
             this.btnIncluir.Name = "btnIncluir";
             this.btnIncluir.Size = new System.Drawing.Size(75, 23);
             this.btnIncluir.TabIndex = 12;
@@ -137,7 +137,7 @@
             this.btnIncluir.UseVisualStyleBackColor = true;
             this.btnIncluir.Click += new System.EventHandler(this.btnIncluir_Click);
             // 
-            // IncluirRota
+            // FormIncluirRota
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -145,7 +145,7 @@
             this.Controls.Add(this.btnIncluir);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtPre);
-            this.Controls.Add(this.cmbDestinho);
+            this.Controls.Add(this.cmbDestino);
             this.Controls.Add(this.cmbOrigem);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label4);
@@ -153,7 +153,9 @@
             this.Controls.Add(this.txtDist);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "IncluirRota";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Name = "FormIncluirRota";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "IncluirRota";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -169,7 +171,7 @@
         private System.Windows.Forms.TextBox txtVel;
         private System.Windows.Forms.TextBox txtDist;
         private System.Windows.Forms.ComboBox cmbOrigem;
-        private System.Windows.Forms.ComboBox cmbDestinho;
+        private System.Windows.Forms.ComboBox cmbDestino;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtPre;
         private System.Windows.Forms.Button btnIncluir;

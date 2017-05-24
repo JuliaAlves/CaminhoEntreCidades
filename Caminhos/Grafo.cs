@@ -192,10 +192,10 @@ namespace Caminhos
         /// <param name="cid2">Destino</param>
         /// <returns>O preço do percurso entre as cidades ou -1 
         /// caso elas não tenham ligação</returns>
-        public double GetPreco(string cid1, string cid2)
+        public float GetPreco(string cid1, string cid2)
         {
             LigacaoCidades lig = GetLigacao(cid1, cid2);
-            return lig != null ? lig.Preco : -1;
+            return lig != null ? (float)lig.Preco : -1;
         }
         
         /// <summary>
@@ -218,22 +218,61 @@ namespace Caminhos
         }
 
         /// <summary>
-        /// Calcula o peso para um caminho entre cidades
+        /// Calcula a distância total percorrida para um caminho entre cidades
         /// </summary>
         /// <param name="caminho">Caminho percorrido</param>
-        /// <returns>O peso do caminho</returns>
-        public float Peso(string[] caminho)
+        /// <returns>A distância percorrida no caminho</returns>
+        public int GetDistancia(string[] caminho)
         {
-            float total = 0.0f;
+            int total = 0;
 
             string anterior = null;
             foreach (string atual in caminho)
             {
                 if (anterior != null)
-                {
-                    LigacaoCidades l = GetLigacao(anterior, atual);
-                    total += l.Distancia / (float)l.VelocidadeMedia;
-                }
+                    total += GetDistancia(anterior, atual);
+
+                anterior = atual;
+            }
+
+            return total;
+        }
+
+        /// <summary>
+        /// Calcula o tempo gasto para percorrer um caminho entre cidades
+        /// </summary>
+        /// <param name="caminho">Caminho percorrido</param>
+        /// <returns>O tempo gasto</returns>
+        public float GetTempo(string[] caminho)
+        {
+            int total = 0;
+
+            string anterior = null;
+            foreach (string atual in caminho)
+            {
+                if (anterior != null)
+                    total += GetVelocidadeMedia(anterior, atual);
+
+                anterior = atual;
+            }
+
+            return (float)GetDistancia(caminho) / total;
+        }
+
+        /// <summary>
+        /// Calcula o preço para percorrer um caminho entre cidades
+        /// </summary>
+        /// <param name="caminho">Caminho percorrido</param>
+        /// <returns>O preço total</returns>
+        public float GetPreco(string[] caminho)
+        {
+            float total = 0;
+
+            string anterior = null;
+            foreach (string atual in caminho)
+            {
+                if (anterior != null)
+                    total += GetPreco(anterior, atual);
 
                 anterior = atual;
             }
@@ -246,28 +285,26 @@ namespace Caminhos
         /// </summary>
         /// <param name="cid1">Cidade de origem</param>
         /// <param name="cid2">Cidade de destino</param>
-        /// <param name="percorrido">Lista de cidades percorridas</param>
+        /// <param name="percorridos">Lista de cidades percorridas</param>
         /// <returns>Uma lista com o nome das cidades percorridas para se ir de cid1
         /// a cid2 ou null caso não haja caminho entre as duas cidades</returns>
-        private string[][] ProcurarCaminhos(string cid1, string cid2, List<string> percorrido)
+        private string[][] ProcurarCaminhos(string cid1, string cid2, string[] percorridos)
         {
             List<string[]> caminhos = new List<string[]>();
 
+            List<string> percorrido = new List<string>(percorridos);
             List<string>.Enumerator e = GetSaidas(cid1).GetEnumerator();
+            percorrido.Add(cid1);
 
             while (e.MoveNext())
             {
                 if (e.Current == cid2)
                 {
-                    List<string> caminho = new List<string>();
-                    caminho.Add(cid1);
-                    caminho.Add(cid2);
-                    caminhos.Add(caminho.ToArray());
+                    caminhos.Add(new string[] { cid1, cid2 });
                 }
                 else if (!percorrido.Contains(e.Current))
                 {
-                    percorrido.Add(cid1);
-                    string[][] proximos = ProcurarCaminhos(e.Current, cid2, percorrido);
+                    string[][] proximos = ProcurarCaminhos(e.Current, cid2, percorrido.ToArray());
                     
                     if (proximos != null)
                         foreach (string[] proximo in proximos)
@@ -292,7 +329,7 @@ namespace Caminhos
         /// a cid2 ou null caso não haja caminho entre as duas cidades</returns>
         public string[][] ProcurarCaminhos(string cid1, string cid2)
         {
-            return ProcurarCaminhos(cid1, cid2, new List<string>());
+            return ProcurarCaminhos(cid1, cid2, new string[] { });
         }
     }
 }
